@@ -6,13 +6,6 @@ import java.util.List;
         给定一个链表，旋转链表，将链表每个节点向右移动 k 个位置，其中 k 是非负数。
  */
 public class LeetCode0061 {
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null || k == 0 || head.next == null)
             return head;

@@ -3,13 +3,6 @@ package com.linkedlist;
 import java.util.ListResourceBundle;
 
 public class LeetCode0025 {
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode pre = new ListNode(0, head), res = pre;
         while (head != null) {

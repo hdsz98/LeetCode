@@ -6,13 +6,6 @@ package com.linkedlist;
         你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。
  */
 public class LeetCode0024 {
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
-    }
     public ListNode swapPairs(ListNode head) {
         ListNode pre = new ListNode(0, head), res = pre;
         while (head != null && head.next != null) {
