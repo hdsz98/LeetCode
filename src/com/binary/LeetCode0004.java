@@ -5,44 +5,25 @@ package com.binary;
  */
 public class LeetCode0004 {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int n1 = nums1.length, n2 = nums2.length;
-        int n = n1 + n2;
-        double median = 0;
-        if (n % 2 == 1) {
-            int mid = n / 2;
-            median = getKthElement(nums1, nums2, mid + 1);
-        }
-        else {
-            int mid = n / 2 - 1, mid2 = n / 2;
-            median = (getKthElement(nums1, nums2, mid + 1) + getKthElement(nums1, nums2, mid2 + 1)) / 2.0;
-        }
-        return median;
+        int m = nums1.length;
+        int n = nums2.length;
+        int left = (m + n + 1) / 2;
+        int right = (m + n + 2) / 2;
+        return (findKth(nums1, 0, nums2, 0, left) + findKth(nums1, 0, nums2, 0, right)) / 2.0;
     }
-    public int getKthElement(int[] nums1, int[] nums2, int k) {
-        int n1 = nums1.length, n2 = nums2.length;
-        int index1 = 0, index2 = 0;
-        int kthElement = 0;
-        while (true) {
-            // 边界
-            if (index1 == n1)
-                return nums2[index2 + k - 1];
-            if (index2 == n2)
-                return nums1[index1 + k - 1];
-            if (k == 1)
-                return Math.min(nums1[index1], nums2[index2]);
-
-            // 正常
-            int half = k / 2;
-            int newIndex1 = Math.min(index1 + half, n1) - 1, newIndex2 = Math.min(index2 + half, n2) - 1;
-            int pivot1 = nums1[newIndex1], pivot2 = nums2[newIndex2];
-            if (pivot1 <= pivot2) {
-                k -= (newIndex1 - index1 + 1);
-                index1 = newIndex1 + 1;
-            }
-            else {
-                k-= (newIndex2 - index2 + 1);
-                index2 = newIndex2 + 1;
-            }
+    //i: nums1的起始位置 j: nums2的起始位置
+    public int findKth(int[] nums1, int i, int[] nums2, int j, int k){
+        if( i >= nums1.length) return nums2[j + k - 1];//nums1为空数组
+        if( j >= nums2.length) return nums1[i + k - 1];//nums2为空数组
+        if(k == 1){
+            return Math.min(nums1[i], nums2[j]);
+        }
+        int midVal1 = (i + k / 2 - 1 < nums1.length) ? nums1[i + k / 2 - 1] : Integer.MAX_VALUE;
+        int midVal2 = (j + k / 2 - 1 < nums2.length) ? nums2[j + k / 2 - 1] : Integer.MAX_VALUE;
+        if(midVal1 < midVal2){
+            return findKth(nums1, i + k / 2, nums2, j , k - k / 2);
+        }else{
+            return findKth(nums1, i, nums2, j + k / 2 , k - k / 2);
         }
     }
 }
