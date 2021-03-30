@@ -26,5 +26,6 @@ public class LeetCode0124 {
         int right = Math.max(0, getMax(r.right));
         ret = Math.max(ret, r.val + left + right); // 判断在该节点包含左右子树的路径和是否大于当前最大路径和
         return Math.max(left, right) + r.val;
+
     }
 }
